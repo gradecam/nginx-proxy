@@ -1,4 +1,4 @@
-![nginx 1.9.0](https://img.shields.io/badge/nginx-1.9.0-brightgreen.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![nginx 1.9.2](https://img.shields.io/badge/nginx-1.9.2-brightgreen.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 nginx-proxy sets up a container running nginx and [docker-gen][1].  docker-gen generates reverse proxy configs for nginx and reloads nginx when containers are started and stopped.
 
@@ -15,6 +15,11 @@ Then start any containers you want proxied with an env var `VIRTUAL_HOST=subdoma
     $ docker run -e VIRTUAL_HOST=foo.bar.com  ...
 
 Provided your DNS is setup to forward foo.bar.com to the a host running nginx-proxy, the request will be routed to a container with the VIRTUAL_HOST env var set.
+
+If your are using `boot2docker` start `nginx-proxy` with:
+
+    $ $(boot2docker shellinit)
+    $ docker run -p 80:80 -e DOCKER_HOST -e DOCKER_CERT_PATH -e DOCKER_TLS_VERIFY -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH -it jwilder/nginx-proxy
 
 ### Multiple Ports
 
